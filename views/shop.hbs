@@ -1,0 +1,170 @@
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Shop</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Shop Page  -->
+    <div class="shop-box-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        <div class="product-item-filter row">
+                            <div class="col-12 col-sm-8 text-center text-sm-left">
+                                <div class="toolbar-sorter-right">
+                                    <span>Sort by </span>
+                                    <select onchange="selectParam('sort', this.value)" id="sort" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+									<option data-display="Select">Default</option>
+									<option value="name">Name</option>
+									<option value="price - high">High Price → Low Price</option>
+									<option value="price - low">Low Price → High Price</option>
+								</select>
+                                </div>
+                                {{#each Categories}}
+                                <p>Showing all {{Products.length}} results</p>
+                                {{/each}}
+                            </div>
+                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                                <ul class="nav nav-tabs ml-auto">
+                                    <li>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-categorie-box">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <div class="row">
+                                        {{#each products}}
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="products-single fix">
+                                                <div class="box-img-hover">
+                                                    <div class="type-lb">
+                                                        <p class="{{status}}">{{status}}</p>
+                                                    </div>
+                                                    <img src="{{imagepath}}" class="img-fluid" alt="Image">
+                                                    <div class="mask-icon">
+                                                        <ul>
+                                                            <li><a href="./shop-detail/{{id}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>                          
+                                                        </ul>
+                                                      
+                                                       
+                                                        <a class="btn hvr-hover add-to-cart" data-id="{{id}}" data-fancybox-close="" style="color: cornsilk;" >Add to cart</a>
+                                                    </div>
+                                                </div>
+                                                <div class="why-text">
+                                                    <h6>{{Category.name}}</h6>
+                                                    <h2>{{name}}</h2>
+                                                    <h4> {{price}}₫</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="list-view">
+                                    <div class="list-view-box">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-view-box">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                    <div class="product-categori">
+                        <div class="search-product">
+                            <form action="/products" method="GET">
+                                <input class="form-control" placeholder="Search here..." type="text" name="search">
+                                <button type="submit"> <i class="fa fa-search"></i> </button>
+                            </form>
+                        </div>
+                        <div class="filter-sidebar-left">
+                            <div class="title-left">
+                                <h3>Categories</h3>
+                            </div>
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">      
+                                <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
+                                   <ul class = "main-categories">
+                                        <li class = "common-filter">
+                                            <form action = "#">
+                                                <ul>
+                                                {{#each categories}}
+                                                <li class="list-group-item list-group-item-action"><input class = "pixel-radio" type = "radio" id = "category{{id}}" name = "category">
+                                                <label for = "category{{id}}" onclick = "selectParam('category', {{id}}, true)">{{name}}
+                                                    <span> ({{Products.length}})</span>
+                                                </label>
+                                                </li>
+                                                {{/each}}
+                                                </ul>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Shop Page -->
+    <script>
+        let urlParams = new URLSearchParams(location.search);
+        let params = {
+            category: 0,
+            sort: 'name',
+            search: ''
+        };
+        for (let key in params) {
+            if (!urlParams.has(key)){
+                urlParams.append(key, params[key]);
+            }
+        }
+
+        for (let key in params) {
+            let control = $(`#${key}${urlParams.get(key)}`);
+            if (control) {
+                $(control).prop('checked', true);
+            }
+        }
+        $('#sort').val(urlParams.get('sort'));
+
+        function selectParam(key, value, reset = false){
+            if (reset) {
+                for (let key in params) {
+                    urlParams.set(key, params[key]);
+                }   
+            }
+            
+            urlParams.set(key, value);
+            let url = `/products?${urlParams.toString()}`;
+            location.href = url;
+        }
+    </script>

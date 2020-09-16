@@ -1,0 +1,31 @@
+{
+  "name": "freshshop",
+  "version": "1.0.0",
+  "description": "EC Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HCMUS-EC-20A04",
+  "license": "ISC",
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.1",
+    "html": "^1.0.0",
+    "ico": "^0.3.3",
+    "paypal-rest-sdk": "^1.8.1",
+    "pg": "^8.2.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.22.3",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0"
+  }
+}
